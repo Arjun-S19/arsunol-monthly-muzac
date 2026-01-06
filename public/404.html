@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>redirecting…</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        margin: 0;
+        font-family: ui-monospace, Consolas, 'Courier New', monospace;
+        background: #000;
+        color: #fff;
+        display: grid;
+        place-items: center;
+        min-height: 100vh;
+        text-transform: lowercase;
+      }
+    </style>
+  </head>
+  <body>
+    <p>loading the homepage…</p>
+    <script>
+      (function () {
+        fetch('./index.html', { cache: 'no-store' })
+          .then(function (response) { return response.text(); })
+          .then(function (html) {
+            document.open();
+            document.write(html);
+            document.close();
+          })
+          .catch(function () {
+            window.location.replace('./');
+          });
+      })();
+    </script>
+  </body>
+</html>
