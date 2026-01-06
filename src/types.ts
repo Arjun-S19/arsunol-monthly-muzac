@@ -6,6 +6,7 @@ export type BlogPost = {
   isoPosted: string;
   isoUpdated?: string;
   tags: string[];
+  playlist: string;
   excerpt: string;
   html: string;
 };

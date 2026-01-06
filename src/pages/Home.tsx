@@ -79,7 +79,13 @@ export default function HomePage() {
 
       <div className="post-list">
         {filteredPosts.length === 0 ? (
-          <p className="post-list-empty">null</p>
+          <button
+            className="post-list-empty"
+            type="button"
+            onClick={() => window.open('https://open.spotify.com/user/arjun12367', '_blank', 'noopener')}
+          >
+            <span>null</span>
+          </button>
         ) : (
           filteredPosts.map((post) => (
             <PostCard key={post.slug} post={post} />

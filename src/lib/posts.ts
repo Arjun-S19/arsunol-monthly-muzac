@@ -26,8 +26,9 @@ const posts: BlogPost[] = Object.entries(modules).reduce<BlogPost[]>((acc, [path
   const isoUpdated = parsedUpdated ? parsedUpdated.toISOString() : undefined;
   const title = (data.title ?? slug).toString().trim().toLowerCase();
   const tags = normalizeTags(data.tags);
+  const playlist = data.playlist;
   const rawHtml = marked.parse(content.trim()) as string;
-  const html = applyLinkTargets(enhanceEmbeds(rawHtml));
+  const html = applyLinkTargets(enhanceEmbeds(applyHrStyling(rawHtml)));
   const excerpt = stripMarkup(html).slice(0, 220).toLowerCase();
 
   acc.push({
@@ -38,6 +39,7 @@ const posts: BlogPost[] = Object.entries(modules).reduce<BlogPost[]>((acc, [path
     postedLabel: formatDate(parsedPosted),
     updatedLabel: parsedUpdated ? formatDate(parsedUpdated) : undefined,
     tags,
+    playlist,
     excerpt,
     html
   } satisfies BlogPost);
@@ -127,8 +129,8 @@ function parseVisibilityValue(value: unknown): boolean {
   if (value === undefined || value === null) return true;
   if (typeof value === 'boolean') return value;
   const normalized = String(value).trim().toLowerCase();
-  if (['public', 'true', 'yes', 'y', '1'].includes(normalized)) return true;
-  if (['private', 'false', 'no', 'n', '0'].includes(normalized)) return false;
+  if (['public', 'true'].includes(normalized)) return true;
+  if (['private', 'false'].includes(normalized)) return false;
   return true;
 }
 
@@ -184,6 +186,10 @@ function enhanceEmbeds(html: string): string {
 
     return embeds.join('\n');
   });
+}
+
+function applyHrStyling(html: string): string {
+  return html.replace(/<hr\s*\/?\s*>/gi, '<hr class="post-divider" />');
 }
 
 function buildEmbed(rawUrl: string): string | null {

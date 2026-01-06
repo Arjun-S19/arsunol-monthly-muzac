@@ -8,11 +8,10 @@ type LayoutProps = {
 export default function Layout({ children }: LayoutProps) {
   return (
     <div className="layout-shell">
+      <div className="bg-soften" aria-hidden="true" />
       <main className="page" id="app-shell">
-        <div className="card">
-          {children}
-          <Footer />
-        </div>
+        {children}
+        <Footer />
       </main>
     </div>
   );

@@ -85,6 +85,12 @@ export default function PostPage() {
             </button>
           ))}
         </div>
+        {post.playlist 
+        ? <p>playlist: 
+          <button className="playlist-link" type="button" onClick={() => window.open(post.playlist, '_blank', 'noopener')}>
+            {post.playlist}</button>
+          </p> 
+        : null}
       </header>
       <section className="post-body" dangerouslySetInnerHTML={{ __html: post.html }} />
     </article>
