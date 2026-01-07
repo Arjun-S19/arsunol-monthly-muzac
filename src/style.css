@@ -2,35 +2,35 @@
   font-family: 'apercu mono pro';
   src: url('./assets/fonts/ApercuMonoProLight.ttf') format('truetype');
   font-weight: 300;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {
   font-family: 'apercu mono pro';
   src: url('./assets/fonts/ApercuMonoProRegular.ttf') format('truetype');
   font-weight: 400;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {
   font-family: 'apercu mono pro';
   src: url('./assets/fonts/ApercuMonoProMedium.ttf') format('truetype');
   font-weight: 500;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {
   font-family: 'apercu mono pro';
   src: url('./assets/fonts/ApercuMonoProBold.ttf') format('truetype');
   font-weight: 700;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {
   font-family: 'planet kosmos';
   src: url('./assets/fonts/PlanetKosmos.TTF') format('truetype');
   font-weight: 400;
-  font-display: swap;
+  font-display: block;
 }
 
 :root {

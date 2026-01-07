@@ -21,15 +21,23 @@
     <p>loading the homepage…</p>
     <script>
       (function () {
-        fetch('./index.html', { cache: 'no-store' })
-          .then(function (response) { return response.text(); })
+        var segments = window.location.pathname.split('/').filter(Boolean);
+        var repoSegment = segments.length ? segments[0] : '';
+        var basePath = repoSegment ? '/' + repoSegment + '/' : '/';
+        var baseUrl = window.location.origin + basePath;
+
+        fetch(baseUrl + 'index.html', { cache: 'no-store' })
+          .then(function (response) {
+            if (!response.ok) throw new Error('fetch failed');
+            return response.text();
+          })
           .then(function (html) {
             document.open();
             document.write(html);
             document.close();
           })
           .catch(function () {
-            window.location.replace('./');
+            window.location.replace(basePath);
           });
       })();
     </script>
