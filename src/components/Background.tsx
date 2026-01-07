@@ -1,7 +1,5 @@
 import { useEffect, useRef } from 'react';
 import { AsciiWaves } from '../lib/asciiLayers';
-import { AudioViz } from '../lib/audio';
-import { initBackgroundAudio } from '../lib/backgroundAudio';
 
 type Layers = {
   darkCanvas: HTMLCanvasElement;
@@ -62,22 +60,10 @@ export default function Background() {
     waves.setOverlayMode('edge');
     waves.setOverlaySmoothing(0.65);
 
-    const audio = new AudioViz();
-    if (!audio.ready) {
-      audio.init().then(() => audio.setDb(-Infinity)).catch(() => undefined);
-    } else {
-      audio.setDb(-Infinity);
-    }
-    const audioHandle = initBackgroundAudio(audio, `${import.meta.env.BASE_URL ?? ''}kyoto.wav`, -Infinity);
-    const fallback = new Uint8Array(1024);
+    const placeholderDomain = new Uint8Array(1024);
 
     const tick = () => {
-      try {
-        audio.pull?.();
-      } catch {
-      }
-      const domain = (audio as any)?.data as Uint8Array | undefined;
-      waves.frame(domain && domain.length ? domain : fallback);
+      waves.frame(placeholderDomain);
       rafRef.current = requestAnimationFrame(tick);
     };
 
@@ -85,7 +71,6 @@ export default function Background() {
 
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      audioHandle?.dispose?.();
     };
   }, []);
 
