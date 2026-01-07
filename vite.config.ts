@@ -3,7 +3,8 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
-  const base = (env.VITE_SITE_BASE || './').trim() || './';
+  const defaultBase = '/arsunol-monthly-muzac/';
+  const base = (env.VITE_SITE_BASE || defaultBase).trim() || defaultBase;
 
   return {
     base,
