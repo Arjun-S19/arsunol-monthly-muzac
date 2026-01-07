@@ -57,6 +57,7 @@ export default function HomePage() {
   return (
     <section className="home-stack">
       <header className="home-head">
+        <script data-goatcounter="https://arsunolmonthlymuzac.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
         <h1>arsunol's monthly muzac</h1>
         <p className="lede">
             a blog where i record my monthly music genre explorations
