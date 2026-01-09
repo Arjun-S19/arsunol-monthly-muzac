@@ -3,6 +3,7 @@ import Layout from './components/Layout';
 import Background from './components/Background';
 import HomePage from './pages/Home';
 import PostPage from './pages/Post';
+import TagsPage from './pages/Tags';
 
 export default function App() {
   const rawBase = import.meta.env.BASE_URL || '/';
@@ -15,6 +16,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/blog/:slug" element={<PostPage />} />
+          <Route path="/tags" element={<TagsPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Layout>

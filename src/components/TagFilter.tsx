@@ -1,3 +1,6 @@
+import { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
+
 type TagFilterProps = {
   tags: { tag: string; count: number }[];
   active: string[];
@@ -6,6 +9,13 @@ type TagFilterProps = {
 };
 
 export default function TagFilter({ tags, active, onToggle, onClear }: TagFilterProps) {
+  const [collapsed, setCollapsed] = useState(tags.length > 15);
+
+  const visibleTags = useMemo(
+    () => (collapsed ? tags.slice(0, 15) : tags),
+    [collapsed, tags]
+  );
+
   return (
     <section className="tag-filter">
       <div className="tag-filter-head">
@@ -17,7 +27,7 @@ export default function TagFilter({ tags, active, onToggle, onClear }: TagFilter
         )}
       </div>
       <div className="tag-filter-grid">
-        {tags.map((tag) => {
+        {visibleTags.map((tag) => {
           const isActive = active.includes(tag.tag);
           return (
             <button
@@ -31,6 +41,18 @@ export default function TagFilter({ tags, active, onToggle, onClear }: TagFilter
             </button>
           );
         })}
+      </div>
+      <div className="tag-map-row">
+        {tags.length > 15 && (
+          <button
+            type="button"
+            className="ghost-link tag-expand-link"
+            onClick={() => setCollapsed((prev) => !prev)}
+          >
+            {collapsed ? 'expand' : 'collapse'}
+          </button>
+        )}
+        <Link to="/tags" className="ghost-link tag-map-link">tags visualizer</Link>
       </div>
     </section>
   );

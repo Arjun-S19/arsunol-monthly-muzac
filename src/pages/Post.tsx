@@ -65,7 +65,6 @@ export default function PostPage() {
         type="button"
         className="post-back-button"
         onClick={() => navigate('/')}
-        aria-label="return to homepage"
       >
         ← back
       </button>
