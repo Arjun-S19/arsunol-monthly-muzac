@@ -5,7 +5,8 @@ a blog where i record my monthly music genre explorations
 ## stack
 - react 19 + typescript + vite
 - react router
-- gray-matter + marked
+- gray-matter + marked (markdown integration)
+- d3-force (graph visualizer)
 - goatcounter analytics
 
 ## features
@@ -16,4 +17,7 @@ a blog where i record my monthly music genre explorations
     - markdown-based blog posts with frontmatter for route slug, posted/updated dates, tags, playlist link, and post visibility
     - responsive title sizing
     - automatic spotify/youtube link embedding
+- tag visualizer page
+    - force-directed tag map with hover/pin interactions
+    - related tags and post list per selection with quick nav
 - custom css styling and ascii waves background rendered via a deterministic sine wave engine
